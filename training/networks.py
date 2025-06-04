@@ -534,7 +534,6 @@ class PerturbGenerator(torch.nn.Module):
 
 
     def forward(self, z, c, truncation_psi=1, truncation_cutoff=None, return_layers=False, **synthesis_kwargs):
-        print(z.shape);exit(0)
         # forward function will be used in FID Evaluation
         # We manually generate the c to override the original c from evaluation tools
         if self.c_dim > 0:
@@ -553,6 +552,7 @@ class PerturbGenerator(torch.nn.Module):
         # fg
         ws_fg = self.mapping_fg(z, c, truncation_psi=truncation_psi, truncation_cutoff=truncation_cutoff)
         fg_rgba = self.synthesis_fg(ws_fg, **synthesis_kwargs)
+        print(fg_rgba.shape);exit(0)
         fg_rgb = fg_rgba[:, :3]
         fg_a = fg_rgba[:, 3:].sigmoid()
         if return_layers:
