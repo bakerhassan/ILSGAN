@@ -195,9 +195,9 @@ class ILSLoss(Loss):
         # fg
         with misc.ddp_sync(self.G_synthesis_fg, sync):
             fg_rgba = self.G_synthesis_fg(ws_fg)
-            fg_rgb = fg_rgba[:, :3]
-            fg_a = fg_rgba[:, 3:].sigmoid()
-            raw_fg_a = fg_rgba[:, 3:]
+            fg_rgb = fg_rgba[:, :fg_rgba.shape[1]//2]
+            fg_a = fg_rgba[:, fg_rgba.shape[1]//2:].sigmoid()
+            raw_fg_a = fg_rgba[:, fg_rgba.shape[1]//2:]
 
         layer = {
             "bg": bg_rgb,
@@ -221,8 +221,8 @@ class ILSLoss(Loss):
         # fg
         with misc.ddp_sync(self.G_synthesis_fg, sync):
             fg_rgba = self.G_synthesis_fg(ws['fg'])
-            fg_rgb = fg_rgba[:, :3]
-            fg_a = fg_rgba[:, 3:].sigmoid()
+            fg_rgb = fg_rgba[:, :fg_rgba.shape[1]//2]
+            fg_a = fg_rgba[:, fg_rgba.shape[1]//2:].sigmoid()
 
         layer = {
             "bg": bg_rgb,
