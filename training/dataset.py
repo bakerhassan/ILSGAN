@@ -451,7 +451,6 @@ class DRCDataset(Dataset):
             name = 'sss'
             raw_shape = self.sss_data.shape
             raw_shape = torch.Size(list(raw_shape[0]) + [3] + list(raw_shape[2:]))
-            print(raw_shape);exit(0)
         self._size = size  # The size of output image (h, w)
         self._type = 'dir'
 
