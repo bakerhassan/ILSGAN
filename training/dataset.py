@@ -407,6 +407,7 @@ class DRCDataset(Dataset):
         self._data_name = data_name
         if data_name == 'sss':
             self.sss_data = torch.load('/lustre/cniel/onr/sss.pt')
+            self.root_dir = ''
         elif data_name == 'cub':
             if path is None:
                 self.root_dir = '../../../datasets_local/DRC_processed/birds'
@@ -581,7 +582,9 @@ class DRCDataset(Dataset):
 
         data_dir = self.root_dir
 
-        if self._data_name == 'cub':
+        if self._data_name == 'sss':
+            image = self.sss_data[raw_idx]
+        elif self._data_name == 'cub':
             key = self._image_fnames[raw_idx]
             bbox = self.bbox_meta[key]
 
@@ -605,9 +608,6 @@ class DRCDataset(Dataset):
             image = img
             i, j, h, w = self._get_crop_params(image) # top, left, height, width
             image = torchvision.transforms.functional.resized_crop(image, i, j, h, w, self._size)
-        elif self._data_name == 'sss':
-            image = self.sss_data[raw_idx].repeat(3,1,1)
-            print(image.shape)
         elif self._data_name == 'dog':
             key = self.file_meta[raw_idx]
             img_path = '%s/%s_orig.png' % (data_dir, key)
