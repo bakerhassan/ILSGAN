@@ -902,13 +902,15 @@ def main(ctx, outdir, dry_run, **config_kwargs):
 
     # prepare the RealDataset
     real_data = config_kwargs['data']
-    assert real_data in ['cub', 'dog', 'car',]
+    assert real_data in ['cub', 'dog', 'car','sss']
     if real_data == 'cub':
         real_data_rel_path = '../../../datasets_local/DRC_processed/birds'
     elif real_data == 'dog':
         real_data_rel_path = '../../../datasets_local/DRC_processed/dogs'
     elif real_data == 'car':
         real_data_rel_path = '../../../datasets_local/DRC_processed/cars'
+    elif real_data == 'sss':
+        real_data_rel_path = '/lustre/cniel/onr/sss.pt'
     else:
         raise NotImplementedError()
     real_data_abs_path = os.path.abspath(real_data_rel_path)
