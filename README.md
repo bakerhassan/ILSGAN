@@ -6,6 +6,8 @@
 </p>
 
 Note from Hassan: this only works with 5<gcc<10.
+conda create -n stylegan2-ada python=3.8 -y
+
 
 This is the official implementation of ILSGAN paper [[arXiv]](https://arxiv.org/abs/2211.13974) [AAAI 2023] [Oral].
 
@@ -13,7 +15,7 @@ This is the official implementation of ILSGAN paper [[arXiv]](https://arxiv.org/
 
 ### Environment
 We follow the environment of [StyleGAN2-ADA](https://github.com/NVlabs/stylegan2-ada-pytorch): PyTorch 1.7.1, Python 3.7, CUDA 11.0.
-You may also need to install these python libraries: `pip install click requests tqdm pyspng ninja imageio-ffmpeg==0.4.3`
+You may also need to install these python libraries: `pip install click requests tqdm pyspng ninja imageio-ffmpeg==0.4.3 torch==1.7.1`
 
 ### Dataset
 We use the `CUB`, `Dog`, and `Car` datasets provided by [DRC](https://github.com/yuPeiyu98/Deep-Region-Competition).
