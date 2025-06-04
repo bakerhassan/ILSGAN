@@ -406,6 +406,7 @@ class DRCDataset(Dataset):
         assert data_name in ['cub', 'dog', 'car', 'sss']
         self._data_name = data_name
         if data_name == 'sss':
+            self.root_dir = '/lustre/cniel/onr/sss.pt'
             self.sss_data = torch.load('/lustre/cniel/onr/sss.pt')
         elif data_name == 'cub':
             if path is None:
