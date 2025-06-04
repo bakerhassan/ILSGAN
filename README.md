@@ -8,6 +8,12 @@
 Note from Hassan: this only works with 5<gcc<10.
 conda create -n stylegan2-ada python=3.8 -y
 
+**How to run on DARWIN**
+source activate /lustre/cniel/.conda/envs/stylegan2-ada/ 
+vpkg_require gcc/7.3 
+vpkg_require cuda/11.3.1
+ python train_ILS_64.py --outdir=./outputs --data=sss --gpus=1 --cfg=ILS_predL --batch=32 
+
 
 This is the official implementation of ILSGAN paper [[arXiv]](https://arxiv.org/abs/2211.13974) [AAAI 2023] [Oral].
 
