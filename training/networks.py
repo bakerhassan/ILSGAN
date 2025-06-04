@@ -521,7 +521,6 @@ class PerturbGenerator(torch.nn.Module):
         # build fg and bg
         self.synthesis_bg = SynthesisNetwork(w_dim=w_dim, img_resolution=img_resolution, img_channels=img_channels, **synthesis_kwargs)
         self.synthesis_fg = SynthesisNetwork(w_dim=w_dim, img_resolution=img_resolution, img_channels=img_channels+1, **synthesis_kwargs)
-        print(img_channels, img_resolution);raise Exception('knfslk')
         self.num_ws_bg = self.synthesis_bg.num_ws
         self.mapping_bg = MappingNetwork(z_dim=z_dim, c_dim=0, w_dim=w_dim, num_ws=self.num_ws_bg, **mapping_kwargs)
 
