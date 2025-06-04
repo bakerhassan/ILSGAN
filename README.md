@@ -5,6 +5,7 @@
   <img src="docs/model_structure.png" width="60%" />
 </p>
 
+Note from Hassan: this only works with 5<gcc<10.
 
 This is the official implementation of ILSGAN paper [[arXiv]](https://arxiv.org/abs/2211.13974) [AAAI 2023] [Oral].
 
