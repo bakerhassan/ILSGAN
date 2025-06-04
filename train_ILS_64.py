@@ -118,13 +118,15 @@ def setup_training_loop_kwargs(
     assert data is not None
     assert isinstance(data, str)
     real_data = data
-    assert real_data in ['cub', 'dog', 'car',]
+    assert real_data in ['cub', 'dog', 'car','sss']
     if real_data == 'cub':
         real_data_rel_path = '../../../datasets_local/DRC_processed/birds'
     elif real_data == 'dog':
         real_data_rel_path = '../../../datasets_local/DRC_processed/dogs'
     elif real_data == 'car':
         real_data_rel_path = '../../../datasets_local/DRC_processed/cars'
+    elif real_data == 'sss':
+        real_data_rel_path = '/lustre/cniel/onr/sss.pt'
     else:
         raise NotImplementedError()
     real_data_abs_path = os.path.abspath(real_data_rel_path)
