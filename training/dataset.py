@@ -607,7 +607,7 @@ class DRCDataset(Dataset):
             image = torchvision.transforms.functional.resized_crop(image, i, j, h, w, self._size)
         elif self._data_name == 'sss':
             image = self.sss_data[raw_idx]
-            print(image.shape);exit(0)
+            print(image.shape)
         elif self._data_name == 'dog':
             key = self.file_meta[raw_idx]
             img_path = '%s/%s_orig.png' % (data_dir, key)
