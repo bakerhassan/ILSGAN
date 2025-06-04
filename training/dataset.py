@@ -438,7 +438,7 @@ class DRCDataset(Dataset):
         self._aspect_ratio = 1.0
         self._crop = 'center'
         # Convert relpath to abspath
-        if self._data_name == 'sss':
+        if self._data_name != 'sss':
             self.root_dir = os.path.abspath(self.root_dir)
             self._path = self.root_dir
             self._zipfile = None
