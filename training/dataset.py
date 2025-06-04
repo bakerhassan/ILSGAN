@@ -634,13 +634,12 @@ class DRCDataset(Dataset):
 
         image = transforms.Resize((int(self._size), int(self._size)))(image)
         image = np.array(image)
-        print(image.shape)
-        exit(0)
         if image.ndim == 2:
             image = image[:, :, np.newaxis] # HW => HWC
         if image.shape[-1] == 1:
             image = np.concatenate([image, image, image], axis=-1)
-        image = image.transpose(2, 0, 1) # HWC => CHW
+        if self._data_name != 'sss':
+            image = image.transpose(2, 0, 1) # HWC => CHW
         return image
 
 
