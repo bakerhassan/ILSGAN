@@ -406,7 +406,6 @@ class DRCDataset(Dataset):
         assert data_name in ['cub', 'dog', 'car', 'sss']
         self._data_name = data_name
         if data_name == 'sss':
-            self.root_dir = '/lustre/cniel/onr/sss.pt'
             self.sss_data = torch.load('/lustre/cniel/onr/sss.pt')
         elif data_name == 'cub':
             if path is None:
@@ -439,16 +438,20 @@ class DRCDataset(Dataset):
         self._aspect_ratio = 1.0
         self._crop = 'center'
         # Convert relpath to abspath
-        self.root_dir = os.path.abspath(self.root_dir)
-        self._path = self.root_dir
-        self._type = 'dir'
-        self._zipfile = None
-        self._size = size       # The size of output image (h, w)
-        self._all_fnames = self.file_meta
-        self._image_fnames = self._all_fnames
+        if self._data_name == 'sss':
+            self.root_dir = os.path.abspath(self.root_dir)
+            self._path = self.root_dir
+            self._zipfile = None
+            self._all_fnames = self.file_meta
+            self._image_fnames = self._all_fnames
 
-        name = 'DRC_' + data_name + str(size) + 'split' + str(self.data_split)
-        raw_shape = [len(self._image_fnames)] + list(self._load_raw_image(0).shape)
+            name = 'DRC_' + data_name + str(size) + 'split' + str(self.data_split)
+            raw_shape = [len(self._image_fnames)] + list(self._load_raw_image(0).shape)
+        else:
+            name = 'sss'
+            raw_shape = self.sss_data.shape
+        self._size = size  # The size of output image (h, w)
+        self._type = 'dir'
 
         super().__init__(name=name, raw_shape=raw_shape, **super_kwargs)
 
