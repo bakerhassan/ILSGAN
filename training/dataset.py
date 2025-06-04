@@ -584,6 +584,7 @@ class DRCDataset(Dataset):
 
         if self._data_name == 'sss':
             image = self.sss_data[raw_idx]
+            print(image.shape);exit(0)
         elif self._data_name == 'cub':
             key = self._image_fnames[raw_idx]
             bbox = self.bbox_meta[key]
