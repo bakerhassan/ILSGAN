@@ -551,9 +551,8 @@ class PerturbGenerator(torch.nn.Module):
         # fg
         ws_fg = self.mapping_fg(z, c, truncation_psi=truncation_psi, truncation_cutoff=truncation_cutoff)
         fg_rgba = self.synthesis_fg(ws_fg, **synthesis_kwargs)
-        print(fg_rgba.shape);exit(0)
-        fg_rgb = fg_rgba[:, :fg_rgba.shape[1]]
-        fg_a = fg_rgba[:, fg_rgba.shape[1]:].sigmoid()
+        fg_rgb = fg_rgba[:, :fg_rgba.shape[1]//2]
+        fg_a = fg_rgba[:, fg_rgba.shape[1]//2:].sigmoid()
 
         if return_layers:
             return {
