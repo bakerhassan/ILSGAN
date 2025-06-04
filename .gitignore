@@ -1,5 +1,6 @@
 __pycache__/
 .cache/
+.idea/
 
 /grad_analysis_samples
 data/
