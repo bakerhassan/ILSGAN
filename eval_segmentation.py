@@ -932,6 +932,45 @@ class CarDatasetCenterCrop(Dataset):
             for item in sample_loader:
                 yield item
 
+
+class SSSDataset(Dataset):
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        self.data = torch.load('/lustre/cniel/onr/sss_masks.pt')
+
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, index):
+        try:
+            item = self.load_item(index)
+        except:
+            print('loading error: sample # {}'.format(index))
+            item = self.load_item(0)
+
+        return item
+
+
+    def load_item(self, index):
+        return self.data['images'][index], self.data['masks']
+
+    def create_iterator(self, batch_size):
+        while True:
+            sample_loader = DataLoader(
+                dataset=self,
+                batch_size=batch_size,
+                drop_last=True,
+                shuffle=False
+            )
+
+            for item in sample_loader:
+                yield item
+
+
+
 #----------------------------------------------------------------------------
 
 class UNetBlock(torch.nn.Module):
@@ -1267,7 +1306,7 @@ def segmentation(
     valset_loader = torch.utils.data.DataLoader(dataset=valset, batch_size=batch, drop_last=False, **data_loader_kwargs)
 
     # prepare the RealDataset
-    assert real_data in ['cub', 'dog', 'car',]
+    assert real_data in ['cub', 'dog', 'car','sss']
     if real_data == 'cub':
         testset = CubDataset(
             root_dir='../../../datasets_local/DRC_processed/birds',
@@ -1289,6 +1328,8 @@ def segmentation(
             data_split=2,
             use_flip=False,
         )
+    elif real_data == 'sss':
+        testset = SSSDataset()
     else:
         raise NotImplementedError()
 

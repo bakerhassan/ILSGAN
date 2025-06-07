@@ -33,7 +33,9 @@ def save_layer(tensor, outdir, layer_name, filename):
     if tensor.size(0) == 1 and layer_name == 'mask':
         tensor = 2 * torch.cat([tensor, tensor, tensor], dim=0) - 1
 
-    img = (tensor.permute(1, 2, 0) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
+    # img = (tensor.permute(1, 2, 0) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
+    img = tensor.permute(1, 2, 0)
+    print(img.shape)
     PIL.Image.fromarray(img.cpu().numpy(), 'RGB').save(outfile)
 
 #----------------------------------------------------------------------------
