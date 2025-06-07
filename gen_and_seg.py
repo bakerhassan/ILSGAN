@@ -104,7 +104,7 @@ def auto_test(
         raise Exception()
     if aug is not None:
         assert aug in ['geom', 'color', 'gc']
-    assert real_data in ['cub', 'dog', 'car', 'lsuncar']
+    assert real_data in ['cub', 'dog', 'car', 'lsuncar', 'sss']
 
     # [Get select pkl]: prepare the ckpt list
     select_pkl = [get_pkl(path, specified_pkl_idx=specified_pkl_idx, topk=topk, sigma=sigma)]
