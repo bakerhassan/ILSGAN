@@ -34,10 +34,9 @@ def save_layer(tensor, outdir, layer_name, filename):
     #     tensor = 2 * torch.cat([tensor, tensor, tensor], dim=0) - 1
 
     # img = (tensor.permute(1, 2, 0) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
-    print(tensor.min(),tensor.max())
-    # img = (tensor.cpu() * 255).clip(0, 255).to(torch.uint8)
-    # img = img.permute(1, 2, 0).squeeze().numpy()
-    # PIL.Image.fromarray(img, mode='L').save(outfile)
+    img = ((tensor - tensor.min())/(tensor.max() - tensor.min())* 255).clip(0, 255).to(torch.uint8).cpu()
+    img = img.permute(1, 2, 0).squeeze().numpy()
+    PIL.Image.fromarray(img, mode='L').save(outfile)
 
 
 #----------------------------------------------------------------------------
