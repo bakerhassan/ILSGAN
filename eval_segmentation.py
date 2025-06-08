@@ -1010,7 +1010,7 @@ class UNetBlock(torch.nn.Module):
         return x
 
 class UNet(torch.nn.Module):
-    def __init__(self, input_channels=3, output_channels=2, bilinear=True, scale=64):
+    def __init__(self, input_channels=1, output_channels=1, bilinear=True, scale=64):
         super(UNet, self).__init__()
         self.scale = scale
         if scale == 64:
