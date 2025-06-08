@@ -36,7 +36,6 @@ def save_layer(tensor, outdir, layer_name, filename):
     # img = (tensor.permute(1, 2, 0) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
     img = (tensor.cpu() * 255).clip(0, 255).to(torch.uint8)
     img = img.permute(1, 2, 0).squeeze().numpy()
-    print(img.shape)
     PIL.Image.fromarray(img, mode='L').save(outfile)
 
 
@@ -177,6 +176,7 @@ def generate_images(
         lyr = G(z, c, truncation_psi=truncation_psi, noise_mode=noise_mode, return_layers=True)
         for lyr_name, lyr_tensor in lyr.items():
             for inst_i in range(this_batch):
+                print(lyr_name)
                 save_layer(lyr[lyr_name][inst_i], outdir, lyr_name, f'{base_i + inst_i + 1:06d}.png')
         all_z.append(z.cpu().numpy())
         if c is not None:
