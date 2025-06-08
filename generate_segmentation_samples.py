@@ -37,7 +37,7 @@ def save_layer(tensor, outdir, layer_name, filename):
     img = (tensor.cpu() * 255).clip(0, 255).to(torch.uint8)
     img = img.permute(1, 2, 0).numpy()
     print(img.shape)
-    Image.fromarray(img, mode='L').save(outfile)
+    PIL.Image.fromarray(img, mode='L').save(outfile)
 
 
 #----------------------------------------------------------------------------
