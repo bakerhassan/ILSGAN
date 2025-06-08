@@ -955,7 +955,6 @@ class SSSDataset(Dataset):
 
 
     def load_item(self, index):
-        print(self.data['images'][index].shape, self.data['masks'][index].shape)
         return self.data['images'][index], self.data['masks'][index]
 
     def create_iterator(self, batch_size):
@@ -1387,7 +1386,7 @@ def segmentation(
         augment = None
 
     # Print network summary tables.
-    misc.print_module_summary(model, [torch.empty([batch, 3, trainset.resolution, trainset.resolution], device=device)])
+    misc.print_module_summary(model, [torch.empty([batch, 1, trainset.resolution, trainset.resolution], device=device)])
 
     # Setup training phases.
     opt = torch.optim.Adam(model.parameters(), lr=lr)
