@@ -955,6 +955,7 @@ class SSSDataset(Dataset):
 
 
     def load_item(self, index):
+        print(self.data['images'][index].shape, self.data['masks'][index].shape)
         return self.data['images'][index], self.data['masks'][index]
 
     def create_iterator(self, batch_size):
