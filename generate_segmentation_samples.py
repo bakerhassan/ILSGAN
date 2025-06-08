@@ -175,8 +175,8 @@ def generate_images(
             c = torch.nn.functional.one_hot(torch.randint(G.c_dim, [this_batch, ]).to(device), G.c_dim)
         lyr = G(z, c, truncation_psi=truncation_psi, noise_mode=noise_mode, return_layers=True)
         for lyr_name, lyr_tensor in lyr.items():
+            print(lyr_name)
             for inst_i in range(this_batch):
-                print(lyr_name)
                 save_layer(lyr[lyr_name][inst_i], outdir, lyr_name, f'{base_i + inst_i + 1:06d}.png')
         all_z.append(z.cpu().numpy())
         if c is not None:
