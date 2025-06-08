@@ -30,8 +30,8 @@ def save_layer(tensor, outdir, layer_name, filename):
     outfile = os.path.join(outdir, layer_name, filename)
     os.makedirs(os.path.dirname(outfile), exist_ok=True)
 
-    if tensor.size(0) == 1 and layer_name == 'mask':
-        tensor = 2 * torch.cat([tensor, tensor, tensor], dim=0) - 1
+    # if tensor.size(0) == 1 and layer_name == 'mask':
+    #     tensor = 2 * torch.cat([tensor, tensor, tensor], dim=0) - 1
 
     # img = (tensor.permute(1, 2, 0) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
     img = (tensor.cpu() * 255).clip(0, 255).to(torch.uint8)
@@ -175,8 +175,6 @@ def generate_images(
             c = torch.nn.functional.one_hot(torch.randint(G.c_dim, [this_batch, ]).to(device), G.c_dim)
         lyr = G(z, c, truncation_psi=truncation_psi, noise_mode=noise_mode, return_layers=True)
         for lyr_name, lyr_tensor in lyr.items():
-            print(lyr_name)
-            print(lyr[lyr_name].shape)
             for inst_i in range(this_batch):
                 save_layer(lyr[lyr_name][inst_i], outdir, lyr_name, f'{base_i + inst_i + 1:06d}.png')
         all_z.append(z.cpu().numpy())
