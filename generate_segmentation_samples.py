@@ -176,6 +176,7 @@ def generate_images(
         lyr = G(z, c, truncation_psi=truncation_psi, noise_mode=noise_mode, return_layers=True)
         for lyr_name, lyr_tensor in lyr.items():
             print(lyr_name)
+            print(lyr[lyr_name].shape)
             for inst_i in range(this_batch):
                 save_layer(lyr[lyr_name][inst_i], outdir, lyr_name, f'{base_i + inst_i + 1:06d}.png')
         all_z.append(z.cpu().numpy())
