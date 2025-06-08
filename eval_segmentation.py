@@ -942,7 +942,7 @@ class SSSDataset(Dataset):
 
 
     def __len__(self):
-        return len(self.data)
+        return len(self.data['images'])
 
     def __getitem__(self, index):
         try:
@@ -955,7 +955,7 @@ class SSSDataset(Dataset):
 
 
     def load_item(self, index):
-        return self.data['images'][index], self.data['masks']
+        return self.data['images'][index], self.data['masks'][index]
 
     def create_iterator(self, batch_size):
         while True:
